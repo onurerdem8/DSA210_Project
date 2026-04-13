@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project analyzes 220 BIST IPOs from 2013-2025 to determine which factors may predict post-IPO stock performance. Both pre and post-IPO data will be used to evaluate their relationship with stock returns at 1, 3, 6, 12, 24, 60 months.
+This project analyzes 247 BIST IPOs from 2013-2025 to determine which factors may predict post-IPO stock performance. Both pre and post-IPO data will be used to evaluate their relationship with stock returns at 1, 3, 6, 12, 24, 60 months.
 
 ## Motivation
 
