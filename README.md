@@ -35,6 +35,13 @@ Investing and especially starting early is key for financial safety, and my jour
 - **Market Cap:** Post-IPO nominal capital X stock price at IPO 
 - **Days of Consecutive 10% Gain After Listing (Tavan Serisi):** Directly from stock price data
 
+## Data Preparation
+
+### Concatonated all data in the excel files into two cvs files
+
+- 13 excels between 2013-2025 into ipo_main_cleaned.csv
+- 4 excels between 2020-2023 with oversubscription data into ipo_overs_cleaned.csv
+- Both csv files were also merged with sector excel file from KAP to include the sector as an attribute
 
 ## Hypotheses
 
@@ -59,7 +66,7 @@ Investing and especially starting early is key for financial safety, and my jour
 
 ### Hypothesis Testing:
 
-- Each hypothesis will be tested by comparing returns to see if any statistically significant evidence is found
+- Each hypothesis w8ill be tested by comparing returns to see if any statistically significant evidence is found
 
 ### ML:
 
