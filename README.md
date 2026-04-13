@@ -17,6 +17,7 @@ Investing and especially starting early is key for financial safety, and my jour
 - **Period:** Covers IPOs between 2013-2025
 - **Features:** Company name and ticker, Free float ratio (halka açıklık oranı), Stock price at IPO, Post IPO nominal capital, Underwriter identity(aracı kurum), First day of trading date, Oversubscription rate and Investor Count
 - **Preprocessing:** Convert any financial data to USD to account for inflation
+- **Links:** [2013-2025 version](https://spk.gov.tr/ihrac-verileri/ilk-halka-arz-verileri), and [2020-2023 with oversubscription data version](https://spk.gov.tr/sirketler/duyurular-ve-veriler/ihrac-ve-halka-arz-verileri)
 
 **2. Stock, BIST100 Index, and USD/TRY prices**
 
@@ -26,8 +27,8 @@ Investing and especially starting early is key for financial safety, and my jour
 
 **3. Company Sector Data**
 
-- **Source:** Kamuyu Aydınlatma Platformu (KAP)
-- **Collection Method:** Downloaded official excel files 
+- **Source:** [Kamuyu Aydınlatma Platformu (KAP)](https://kap.org.tr/tr/Sektorler)
+- **Collection Method:** Downloaded official excel files
 
 **4. Data to Be Formulated From The Features Above**
 
