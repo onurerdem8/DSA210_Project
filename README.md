@@ -108,10 +108,11 @@ Investing and especially starting early is key for financial safety, and my jour
 
 ### Key Findings:
 
-- Low market cap and lower free float value are very strong indicators of outperformance
-- Underwriter identity affects returns, most likely since some underwriters do IPOs with lower market cap
-- 10% gain days also predict returns, was tested to see if they led to major crashes in price later on
-- GYO sector companies usually underperform
+- Low market cap and lower free float value are very strong indicators of outperformance 
+- Underwriter identity affects returns, most likely since some underwriters do IPOs with lower market cap 
+- 10% gain days also predict returns, was tested to see if they led to major crashes in price later on 
+- GYO sector companies usually underperform 
+- All findings are also practically significant since they show major price trends 
 
 ### ML:
 
