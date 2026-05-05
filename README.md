@@ -121,7 +121,7 @@ From EDA and hypothesis testing:
 
 From ML modeling:
 - 24-month classification makes a meaningful prediction: best model (LightGBM, pre-IPO features) reaches AP=0.733 vs no-skill baseline of 0.581 — a +0.15 AP increase
-- 12-month classification is much weaker: best model (Lasso AP=0.548 vs baseline 0.514), may suggest short term movements being harder to predict 
+- 12-month classification is much weaker (Lasso AP=0.548 vs baseline 0.514), may suggest short term movements being harder to predict 
 - Lasso's selected features overlap with the EDA-significant ones: underwriter (strongest), free-float-value, GYO sector, and BIST momentum
 - Pre-IPO features alone perform comparably to the early-signal variant, suggesting most of the predictive signal is already present at offering time 
 
