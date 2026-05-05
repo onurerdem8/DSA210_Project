@@ -106,25 +106,31 @@ Investing and especially starting early is key for financial safety, and my jour
 - P value: 0.000481
 - Reject the null hypothesis
 
-### Key Findings:
-
-- Low market cap and lower free float value are very strong indicators of outperformance 
-- Underwriter identity affects returns, most likely since some underwriters do IPOs with lower market cap 
-- 10% gain days also predict returns, was tested to see if they led to major crashes in price later on 
-- GYO sector companies usually underperform 
-- All findings are also practically significant since they show major price trends 
-
 ### ML:
 
-- Machine learning methods like classification and regression will be used to see if returns can be effectively predicted
+Trained binary classifiers to predict whether an IPO had a positive USD return at 12 and 24 months, using only features known at offering time (pre-IPO variant) plus an "early-signal" variant that adds tavan_days. Models compared: a Dummy baseline, Lasso (L1 logistic regression with cross-validated regularization), and LightGBM (with a small grid search over learning rate, num_leaves, and max_depth, using early stopping for n_estimators).
+
+### Key Findings:
+
+From EDA and hypothesis testing:
+- Low market cap and lower free float value are very strong indicators of outperformance
+- Underwriter identity affects returns, most likely since some underwriters do IPOs with lower market cap
+- 10% gain days also predict returns, was tested to see if they led to major crashes in price later on
+- GYO sector companies usually underperform
+- All findings are also practically significant since they show major price trends
+
+From ML modeling:
+- 24-month classification makes a meaningful prediction: best model (LightGBM, pre-IPO features) reaches AP=0.733 vs no-skill baseline of 0.581 — a +0.15 AP increase
+- 12-month classification is much weaker: best model (Lasso AP=0.548 vs baseline 0.514), may suggest short term movements being harder to predict 
+- Lasso's selected features overlap with the EDA-significant ones: underwriter (strongest), free-float-value, GYO sector, and BIST momentum
+- Pre-IPO features alone perform comparably to the early-signal variant, suggesting most of the predictive signal is already present at offering time 
 
 ### AI Usage:
 
 AI Tools (Claude, Gemini) were used for:
   - Merging tables, cleaning and feature generation while data processing
-  - Learning python syntax for visualization, EDA and hypothesis testing 
-
-
+  - Learning python syntax for visualization, EDA and hypothesis testing
+  - Structuring the ML pipeline, cleaning the underwriter column, and explaining methodology choices. The code was reviewed and decisions about features, target definitions, and underwriter handling were made by the author.
 
 
 
