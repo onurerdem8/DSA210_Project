@@ -15,7 +15,7 @@ Investing and especially starting early is key for financial safety, and my jour
 - **Source:** Sermaye Piyasası Kurulu (SPK) 
 - **Collection Method:** Downloaded official excel files 
 - **Period:** Covers IPOs between 2013-2025
-- **Features:** Company name and ticker, Free float ratio (halka açıklık oranı), Stock price at IPO, Post IPO nominal capital, Underwriter identity(aracı kurum), First day of trading date, Oversubscription rate and Investor Count
+- **Features:** Company name and ticker, Free float ratio (halka açıklık oranı), Stock price at IPO, Post IPO nominal capital, Underwriter identity (aracı kurum), First day of trading date, Oversubscription rate and Investor Count
 - **Preprocessing:** Convert any financial data to USD to account for inflation
 - **Links:** [2013-2025 version](https://spk.gov.tr/ihrac-verileri/ilk-halka-arz-verileri), and [2020-2023 with oversubscription data version](https://spk.gov.tr/sirketler/duyurular-ve-veriler/ihrac-ve-halka-arz-verileri)
 
@@ -112,26 +112,72 @@ Trained binary classifiers to predict whether an IPO had a positive USD return a
 
 ### Key Findings:
 
-From EDA and hypothesis testing:
+**From EDA and hypothesis testing:**
 - Low market cap and lower free float value are very strong indicators of outperformance
 - Underwriter identity affects returns, most likely since some underwriters do IPOs with lower market cap
 - 10% gain days also predict returns, was tested to see if they led to major crashes in price later on
 - GYO sector companies usually underperform
 - All findings are also practically significant since they show major price trends
 
-From ML modeling:
+**From ML modeling:**
 - 24-month classification makes a meaningful prediction: best model (LightGBM, pre-IPO features) reaches AP=0.733 vs no-skill baseline of 0.581 — a +0.15 AP increase
 - 12-month classification is much weaker (Lasso AP=0.548 vs baseline 0.514), may suggest short term movements are harder to predict 
 - Lasso's selected features overlap with the EDA-significant ones: underwriter (strongest), free-float-value, GYO sector, and BIST momentum
 - Pre-IPO features alone perform comparably to the early-signal variant, suggesting most of the predictive signal is already present at offering time 
 
+### Limitations and Future Work
+
+**Limitations:**
+
+- The dataset has only 247 IPOs, of which 167 ended up in the training
+  set for the 12m classifier and 141 for the 24m classifier. That's a small sample
+  for ML, so test AP numbers can be noisy and small gains over the baseline shouldn't be over-interpreted.
+
+- The test set is the 15% most recent IPOs that have observable returns at the relevant horizon (roughly April 2024 to February 2025 for the 12m classifier, and September 2023 to April 2024 for the 24m classifier). If the market regime 
+  in those test periods is meaningfully different from earlier years, model performance 
+  on test could underestimate or overestimate how well the model would do 
+  going forward.
+
+- Several features were excluded: listing_year 
+  and usdtry_at_listing both monotonically increase over time, so test values 
+  lie outside the training range and the model can't generalize on them. 
+  Oversubscription rate and investor count were excluded because they're only 
+  available for 2020-2023 IPOs, which doesn't cover the test set.
+
+- Survivorship bias from delisted IPOs. Companies that were delisted after their IPO don't have price data available via Yahoo Finance, so they got dropped from the dataset. This means the sample over-represents IPOs that survived, which may bias predictions toward more favorable outcomes.
+  
+- Regression of continuous returns was attempted but didn't work well 
+  (R² near zero at this sample size), so the project focused on classification.
+
+**Future Work:**
+
+- Incorporate institutional vs retail allocation percentages (available in SPK oversubscription data for 2020-2023 IPOs). The split between institutional and retail demand may carry information beyond oversubscription rate.
+
+- Predict excess return vs BIST-100 instead of absolute USD return. This 
+  removes the macro tailwind/headwind.
+
+- Add macroeconomic features known at listing time (central bank rate, 
+  inflation expectations, BIST-100's recent performance) that take values 
+  in the test range, unlike listing_year.
+
+- Add additional company specific features such as use of proceeds and lock up period length. Extract them from the IPO prospectus. 
+
+- Explore longer horizons (36m, 60m) if more historical data becomes 
+  available. Long term returns are more tied to company fundamentals 
+  that pre-IPO features can capture.
+
+- A separate model for predicting the magnitude of returns (regression) 
+  with a more detailed feature set.
+
+- Nested cross-validation for more robust performance estimation given the 
+  small validation set.
+
 ### AI Usage:
 
-AI Tools (Claude, Gemini) were used for:
+**AI Tools (Claude, Gemini) were used for:**
   - Merging tables, cleaning and feature generation while data processing
   - Learning python syntax for visualization, EDA and hypothesis testing
   - Structuring the ML pipeline, cleaning the underwriter column, and explaining methodology choices. The code was reviewed and decisions about features, target definitions, and underwriter handling were made by the author.
-
 
 
 
