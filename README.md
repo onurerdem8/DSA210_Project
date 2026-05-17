@@ -172,6 +172,74 @@ Trained binary classifiers to predict whether an IPO had a positive USD return a
 - Nested cross-validation for more robust performance estimation given the 
   small validation set.
 
+## Setup and Reproducibility
+
+### Requirements
+- Python 3.11+
+- Dependencies listed in `requirements.txt`
+- Internet connection (only required when running `Data_Analysis.ipynb`, which fetches stock prices via yfinance)
+
+### Installation
+
+```bash
+git clone https://github.com/onurerdem8/DSA210_Project.git
+cd DSA210_Project
+pip install -r requirements.txt
+```
+
+### Running the Project
+
+The notebooks are designed to be run in Google Colab. Since they reference files by their bare filenames (e.g., `pd.read_csv("ipo_final.csv")`), the relevant files must be uploaded to the Colab session's working directory before running each notebook.
+
+**Most users will only want to reproduce the ML results — skip to Step 3.**
+
+#### Step 1 (optional): Data Preparation
+
+Reproduces the cleaned CSVs from the raw SPK Excel files. The outputs are already in `data/processed/` so this step is only needed if you want to verify the cleaning pipeline.
+
+Upload all files from `data/raw/SPK IPO Data/` into the Colab session:
+- `SPK_IPOs_2013.xlsx` through `SPK_IPOs_2025.xlsx` (13 files)
+- `SPK_IPOs_Overs_2020.xlsx` through `SPK_IPOs_Overs_2023.xlsx` (4 files)
+- `KAP_Sectors.xlsx`
+
+Then run `Notebooks/Data Preparation/Data_Preparation.ipynb`. Output: `ipo_main_cleaned.csv` and `ipo_overs_cleaned.csv`.
+
+#### Step 2 (optional): Data Analysis, EDA, and Hypothesis Testing
+
+Produces `ipo_final.csv` (the dataset used by the ML notebook) and runs the EDA and hypothesis tests. Requires internet — uses yfinance to pull stock prices, BIST-100, and USD/TRY history. Note that re-running may produce minor numerical differences from the committed `ipo_final.csv` because Yahoo Finance can update historical data.
+
+Upload from `data/processed/`:
+- `ipo_main_cleaned.csv`
+- `ipo_overs_cleaned.csv`
+
+Then run `Notebooks/Visualization, EDA and Hypothesis Testing/Data_Analysis.ipynb`. Output: `ipo_final.csv` (in the Colab session), plus inline plots and hypothesis test results.
+
+#### Step 3: Machine Learning
+
+The minimum needed to reproduce the ML results. No internet required, fully deterministic given `RNG=42`.
+
+Upload from `data/processed/`:
+- `ipo_final.csv`
+
+Then run `Notebooks/Machine Learning/Machine_Learning.ipynb`. Outputs printed inline: AP comparison table, PR curves, final model test evaluation.
+
+### Project Structure
+
+```
+DSA210_Project/
+├── README.md
+├── Proposal.pdf
+├── requirements.txt
+├── data/
+│   ├── raw/SPK IPO Data/   # original SPK Excel files + KAP sectors file
+│   └── processed/          # cleaned and merged CSVs (ipo_main_cleaned.csv,
+│                           # ipo_overs_cleaned.csv, ipo_final.csv)
+└── Notebooks/
+    ├── Data Preparation/Data_Preparation.ipynb
+    ├── Visualization, EDA and Hypothesis Testing/Data_Analysis.ipynb
+    └── Machine Learning/Machine_Learning.ipynb
+```
+
 ### AI Usage:
 
 **AI Tools (Claude, Gemini) were used for:**
