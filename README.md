@@ -74,6 +74,17 @@ Three models were compared: a **Dummy** baseline (no-skill floor), **Lasso** L1 
 
 The data was split 70/15/15 in time order (oldest → newest) so the test set is the most recent IPOs — a more honest forward test than a random split. **Average Precision (AP)** is the main metric, chosen because the classes aren't perfectly balanced (~57/43 at 12m).
 
+**Results (test set Average Precision):**
+
+| Horizon | Features | Dummy | Lasso | LightGBM |
+|---|---|---|---|---|
+| 12m | pre-IPO | 0.514 | 0.548 | 0.488 |
+| 12m | early-signal | 0.514 | 0.550 | 0.502 |
+| 24m | pre-IPO | 0.581 | 0.647 | **0.733** |
+| 24m | early-signal | 0.581 | 0.647 | 0.682 |
+
+The bolded value is the best overall result.
+
 ## Key Findings
 
 **From EDA and hypothesis testing:**
