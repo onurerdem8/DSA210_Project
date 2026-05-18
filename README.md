@@ -50,6 +50,8 @@ The main file was then enriched in `Data_Analysis.ipynb` with stock-price-derive
 - IPO volume by year (2013–2025)
 - Average 12-month USD return per listing year
 - BIST-100 momentum (distance from 200-day SMA) at every IPO listing date
+
+![USD return distributions across six horizons](figures/eda_1.png)
  
 ### Hypotheses and Test Results
 
@@ -84,6 +86,8 @@ The data was split 70/15/15 in time order (oldest → newest) so the test set is
 | 24m | early-signal | 0.581 | 0.647 | 0.682 |
 
 The bolded value is the best overall result.
+
+![Precision-recall curves on test set](figures/pr_curves.png)
 
 ## Key Findings
 
